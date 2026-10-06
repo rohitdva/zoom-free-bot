@@ -87,7 +87,7 @@ async def run():
         await page.goto(clean_url)
 
         try:
-            await page.fill("#inputname", "Host Assistant")
+            await page.fill("#inputname", "Team DVA ")
             await page.click("#joinBtn")
             await asyncio.sleep(8)
         except Exception as e:
