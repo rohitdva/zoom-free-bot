@@ -3,7 +3,21 @@ from datetime import datetime
 import os
 from playwright.async_api import async_playwright
 
-# 1. Fixed Timed Messages
+# --- 1. Load Webinar Info File (Agar zaroorat ho) ---
+WEBINAR_INFO_FILE = "webinar_info.txt"
+
+
+def load_webinar_details():
+    if os.path.exists(WEBINAR_INFO_FILE):
+        with open(WEBINAR_INFO_FILE, "r", encoding="utf-8") as f:
+            return f.read()
+    return ""
+
+
+# File content load karke rakhein
+webinar_context = load_webinar_details()
+
+# --- 2. Fixed Timed Messages ---
 TIMED_MESSAGES = [
     {
         "time": "10:50",
@@ -23,13 +37,15 @@ TIMED_MESSAGES = [
     },
 ]
 
-# 2. Real-Time Student Chat Rules (Keyword Matching)
+# --- 3. Real-Time Chat Rules (Apne Real Links Yahan Daalein) ---
 KEYWORD_RULES = {
     ("price", "cost", "fee", "fees", "kitna", "pay"): (
-        "Special Webinar Offer price is Rs. 4,999! Link: https://example.com/buy-now"
+        # REPLACE: APNA REAL PAYMENT LINK DAALEIN
+        "Special Webinar Offer price is Rs. 4,999! Link: https://YOUR-ACTUAL-LINK.com/buy"
     ),
     ("workbook", "notes", "pdf", "book"): (
-        "You can download the Workbook from here: https://example.com/workbook"
+        # REPLACE: APNA REAL WORKBOOK LINK DAALEIN
+        "You can download the Workbook from here: https://YOUR-ACTUAL-LINK.com/workbook"
     ),
     ("recording", "replay", "video"): (
         "Yes, you will get lifetime access to the recording!"
@@ -38,7 +54,8 @@ KEYWORD_RULES = {
         "Yes, official course completion certificate will be provided."
     ),
     ("link", "buy", "join", "payment"): (
-        "Payment Link: https://example.com/buy-now"
+        # REPLACE: APNA REAL PAYMENT LINK DAALEIN
+        "Payment Link: https://YOUR-ACTUAL-LINK.com/buy"
     ),
 }
 
@@ -130,7 +147,7 @@ async def run():
                             await chat_input.fill(auto_reply)
                             await page.keyboard.press("Enter")
                             print(f"Replied to '{txt_clean}' -> '{auto_reply}'")
-            except Exception as e:
+            except Exception:
                 pass
 
             await asyncio.sleep(3)
