@@ -105,8 +105,8 @@ async def run():
         sent_timed_indices = set()
         processed_chat_texts = set()
 
-        # Monitoring Loop (~30 minutes)
-        for _ in range(600):
+        # Monitoring Loop (3 Hours 13 Mins: 10:47 AM to 2:00 PM IST)
+        for _ in range(3860):
             now_utc = datetime.utcnow()
             now_ist_mins = (now_utc.hour * 60 + now_utc.minute + 330) % (24 * 60)
             curr_time_str = f"{(now_ist_mins // 60) % 24:02d}:{now_ist_mins % 60:02d}"
