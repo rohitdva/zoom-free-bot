@@ -2,7 +2,7 @@ name: Daily Free Zoom Chatbot
 
 on:
   schedule:
-    # Daily 10:44 AM IST = 05:15 AM UTC
+    # Daily 07:18 AM IST = 05:15 AM UTC
     - cron: '15 5 * * *'
   workflow_dispatch: # Manual test button
 
